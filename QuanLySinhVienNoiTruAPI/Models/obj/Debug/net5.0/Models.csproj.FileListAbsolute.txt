@@ -1,0 +1,12 @@
+D:\ANGULAR\QuanLySinhVienNoiTru\QuanLySinhVienNoiTruAPI\Models\bin\Debug\net5.0\Models.deps.json
+D:\ANGULAR\QuanLySinhVienNoiTru\QuanLySinhVienNoiTruAPI\Models\bin\Debug\net5.0\Models.dll
+D:\ANGULAR\QuanLySinhVienNoiTru\QuanLySinhVienNoiTruAPI\Models\bin\Debug\net5.0\ref\Models.dll
+D:\ANGULAR\QuanLySinhVienNoiTru\QuanLySinhVienNoiTruAPI\Models\bin\Debug\net5.0\Models.pdb
+D:\ANGULAR\QuanLySinhVienNoiTru\QuanLySinhVienNoiTruAPI\Models\obj\Debug\net5.0\Models.csproj.AssemblyReference.cache
+D:\ANGULAR\QuanLySinhVienNoiTru\QuanLySinhVienNoiTruAPI\Models\obj\Debug\net5.0\Models.GeneratedMSBuildEditorConfig.editorconfig
+D:\ANGULAR\QuanLySinhVienNoiTru\QuanLySinhVienNoiTruAPI\Models\obj\Debug\net5.0\Models.AssemblyInfoInputs.cache
+D:\ANGULAR\QuanLySinhVienNoiTru\QuanLySinhVienNoiTruAPI\Models\obj\Debug\net5.0\Models.AssemblyInfo.cs
+D:\ANGULAR\QuanLySinhVienNoiTru\QuanLySinhVienNoiTruAPI\Models\obj\Debug\net5.0\Models.csproj.CoreCompileInputs.cache
+D:\ANGULAR\QuanLySinhVienNoiTru\QuanLySinhVienNoiTruAPI\Models\obj\Debug\net5.0\Models.dll
+D:\ANGULAR\QuanLySinhVienNoiTru\QuanLySinhVienNoiTruAPI\Models\obj\Debug\net5.0\ref\Models.dll
+D:\ANGULAR\QuanLySinhVienNoiTru\QuanLySinhVienNoiTruAPI\Models\obj\Debug\net5.0\Models.pdb

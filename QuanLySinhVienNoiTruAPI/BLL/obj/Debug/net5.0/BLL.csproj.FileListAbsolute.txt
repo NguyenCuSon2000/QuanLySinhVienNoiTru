@@ -1,0 +1,17 @@
+D:\ANGULAR\QuanLySinhVienNoiTru\QuanLySinhVienNoiTruAPI\BLL\bin\Debug\net5.0\BLL.deps.json
+D:\ANGULAR\QuanLySinhVienNoiTru\QuanLySinhVienNoiTruAPI\BLL\bin\Debug\net5.0\BLL.dll
+D:\ANGULAR\QuanLySinhVienNoiTru\QuanLySinhVienNoiTruAPI\BLL\bin\Debug\net5.0\ref\BLL.dll
+D:\ANGULAR\QuanLySinhVienNoiTru\QuanLySinhVienNoiTruAPI\BLL\bin\Debug\net5.0\BLL.pdb
+D:\ANGULAR\QuanLySinhVienNoiTru\QuanLySinhVienNoiTruAPI\BLL\obj\Debug\net5.0\BLL.csproj.AssemblyReference.cache
+D:\ANGULAR\QuanLySinhVienNoiTru\QuanLySinhVienNoiTruAPI\BLL\obj\Debug\net5.0\BLL.GeneratedMSBuildEditorConfig.editorconfig
+D:\ANGULAR\QuanLySinhVienNoiTru\QuanLySinhVienNoiTruAPI\BLL\obj\Debug\net5.0\BLL.AssemblyInfoInputs.cache
+D:\ANGULAR\QuanLySinhVienNoiTru\QuanLySinhVienNoiTruAPI\BLL\obj\Debug\net5.0\BLL.AssemblyInfo.cs
+D:\ANGULAR\QuanLySinhVienNoiTru\QuanLySinhVienNoiTruAPI\BLL\obj\Debug\net5.0\BLL.csproj.CoreCompileInputs.cache
+D:\ANGULAR\QuanLySinhVienNoiTru\QuanLySinhVienNoiTruAPI\BLL\obj\Debug\net5.0\BLL.dll
+D:\ANGULAR\QuanLySinhVienNoiTru\QuanLySinhVienNoiTruAPI\BLL\obj\Debug\net5.0\ref\BLL.dll
+D:\ANGULAR\QuanLySinhVienNoiTru\QuanLySinhVienNoiTruAPI\BLL\obj\Debug\net5.0\BLL.pdb
+D:\ANGULAR\QuanLySinhVienNoiTru\QuanLySinhVienNoiTruAPI\BLL\bin\Debug\net5.0\DAL.dll
+D:\ANGULAR\QuanLySinhVienNoiTru\QuanLySinhVienNoiTruAPI\BLL\bin\Debug\net5.0\Models.dll
+D:\ANGULAR\QuanLySinhVienNoiTru\QuanLySinhVienNoiTruAPI\BLL\bin\Debug\net5.0\DAL.pdb
+D:\ANGULAR\QuanLySinhVienNoiTru\QuanLySinhVienNoiTruAPI\BLL\bin\Debug\net5.0\Models.pdb
+D:\ANGULAR\QuanLySinhVienNoiTru\QuanLySinhVienNoiTruAPI\BLL\obj\Debug\net5.0\BLL.csproj.CopyComplete

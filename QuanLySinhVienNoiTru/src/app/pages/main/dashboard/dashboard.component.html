@@ -1,0 +1,96 @@
+<div class="top">
+    <h2>Quản lý sinh viên nội trú</h2>
+</div>
+<div class="bot">
+    <p-panel header="Tìm kiếm" [style]="{'margin-top': '2px'}">
+        <form class="form-horizontal" role="form" [formGroup]="formsearch"  (ngSubmit)="search()">
+            <div class="form-group">
+                <label class="col-sm-2 control-label no-padding-right"> Họ tên </label>
+                <div class="col-sm-10">
+                    <input formControlName="ho_ten" class="form-control" type="text" placeholder="Họ tên" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label no-padding-right"> Ngày đăng ký </label>
+                <div class="col-sm-10">
+                    <input formControlName="ngay_dang_ky" class="form-control" type="date" placeholder="Ngày đăng ký" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label no-padding-right"> Năm học</label>
+                <div class="col-sm-10">
+                    <input formControlName="nam_hoc" class="form-control" type="text" placeholder="Năm học" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label no-padding-right"></label>
+                <div class="col-sm-11">
+                    <button (click)="search()" class="btn btn-sm btn-primary">Tìm kiếm</button>
+                </div>
+            </div>
+        </form> 
+        <!-- Start Sort Select Option -->
+        <div class="sort-select-list d-flex align-items-center mt-3">
+            <label class="mr-2">Hiển thị:</label>
+            <fieldset>
+                <select class="form-control" [(ngModel)]="pageSize" (ngModelChange)="loadPage(1)">
+                    <option selected value="3">3</option>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                    <option value="{{totalItems}}">All</option>
+                </select>
+            </fieldset>
+        </div> 
+        <!-- End Sort Select Option -->
+        <div class="col-md-4 text-right">
+            <!-- <button class="btn btn-success btn-block" (click)="openPDF()">Download PDF</button> -->
+        </div>
+    </p-panel>
+    <p-table id="student" selectionMode="single" [value]="list_student_stayin" styleClass="p-datatable-gridlines" [style]="{'margin-top': '2px', 'width': '100%'}" >
+        <ng-template pTemplate="header">
+            <tr>
+                <th>STT</th>
+                <th>Mã sinh viên</th>
+                <th>Họ tên</th>
+                <th>Số CMND</th>
+                <th>Số điện thoại</th>
+                <th>Email</th>
+                <th>Lớp học</th>
+                <th>Địa chỉ thường trú</th>
+                <th>Ngày đăng ký</th>
+                <th>Năm học</th>
+                <th>Học kỳ</th>
+                <th>Bắt đầu nội trú</th>
+                <th>Kết thúc nội trú</th>
+                <th>Action</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-student  let-i="rowIndex">
+            <tr>
+                <td style="text-align: center;">{{i+1}}</td>
+                <td style="text-align: center;">{{student.ma_sinh_vien}}</td>
+                <td style="text-align: center;">{{student.ho_ten}}</td>
+                <td style="text-align: center;">{{student.so_cmnd}}</td>
+                <td style="text-align: center;">{{student.so_dien_thoai}}</td>
+                <td style="text-align: center;">{{student.email}}</td>
+                <td style="text-align: center;">{{student.lop_hoc}}</td>
+                <td style="text-align: center;">{{student.dia_chi_thuong_tru}}</td>
+                <td style="text-align: center;">{{student.ngay_dang_ky | DateVN}}</td>
+                <td style="text-align: center;">{{student.nam_hoc}}</td>
+                <td style="text-align: center;">{{student.hoc_ky}}</td>
+                <td style="text-align: center;">{{student.bat_dau_noi_tru | DateVN}}</td>
+                <td style="text-align: center;">{{student.ket_thuc_noi_tru | DateVN}}</td>
+                <td  style="text-align: center;">
+                    <button pButton type="button" (click)="openUpdateModal(student)" title="Edit"  class="p-button-secondary">Edit</button>
+                    <button pButton type="button" onclick="confirm('Bạn chắc chắn muốn xóa không?')" (click)="onDelete(student.ma_noi_tru)" title="Delete"  class="p-button-danger">Delete</button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+    <div class="mt-5" style="position: relative;margin-left: 40%;">
+        <ngb-pagination [collectionSize]="totalItems" [pageSize]="pageSize" [(page)]="page" [maxSize]="10" [rotate]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+    </div>
+</div>
+

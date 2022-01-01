@@ -1,0 +1,201 @@
+<div class="top">
+    <h2>Quản lý sinh viên</h2>
+    <div class="right">
+        <p-button (click)="showAdd()" icon="pi pi-external-link" label="Thêm"></p-button>
+        
+        <!-- <p-button (click)="exportExcel()" icon="pi pi-external-link" label="Export data"></p-button> -->
+    </div>
+</div>
+<div class="bot">
+    <p-panel header="Tìm kiếm" [style]="{'margin-top': '2px'}">
+        <form class="form-horizontal" role="form" [formGroup]="formsearch"  (ngSubmit)="search()">
+            <div class="form-group">
+                <label class="col-sm-2 control-label no-padding-right"> Họ tên </label>
+                <div class="col-sm-10">
+                    <input formControlName="ho_ten" class="form-control" type="text" placeholder="Họ tên" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label no-padding-right"> Lớp học </label>
+                <div class="col-sm-10">
+                    <input formControlName="lop_hoc" class="form-control" type="text" placeholder="Lớp học" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label no-padding-right"> Địa chỉ thường trú</label>
+                <div class="col-sm-10">
+                    <input formControlName="dia_chi_thuong_tru" class="form-control" type="text" placeholder="Địa chỉ thường trú" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-1 control-label no-padding-right"></label>
+                <div class="col-sm-11">
+                    <button (click)="search()" class="btn btn-sm btn-primary">Tìm kiếm</button>
+                </div>
+            </div>
+        </form> 
+        <!-- Start Sort Select Option -->
+        <div class="sort-select-list d-flex align-items-center mt-3">
+            <label class="mr-2">Hiển thị:</label>
+            <fieldset>
+                <select class="form-control" [(ngModel)]="pageSize" (ngModelChange)="loadPage(1)">
+                    <option selected value="3">3</option>
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="50">50</option>
+                    <option value="{{totalItems}}">All</option>
+                </select>
+            </fieldset>
+        </div> 
+        <!-- End Sort Select Option -->
+        <div class="col-md-4 text-right">
+            <!-- <button class="btn btn-success btn-block" (click)="openPDF()">Download PDF</button> -->
+        </div>
+    </p-panel>
+    <p-table id="student" selectionMode="single" [value]="students" styleClass="p-datatable-gridlines" [style]="{'margin-top': '2px', 'width': '100%'}" >
+        <ng-template pTemplate="header">
+            <tr>
+                <th>STT</th>
+                <th>Họ tên</th>
+                <th>Ngày sinh</th>
+                <th>Giới tính</th>
+                <th>Nơi sinh</th>
+                <th>Số CMND</th>
+                <th>Số điện thoại</th>
+                <th>Khoa</th>
+                <th>Lớp học</th>
+                <th>Địa chỉ thường trú</th>
+                <th>Ảnh</th>
+                <th>Quyền</th>
+                <th>Action</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-student  let-i="rowIndex">
+            <tr>
+                <td style="text-align: center;">{{i+1}}</td>
+                <td style="text-align: center;">{{student.ho_ten}}</td>
+                <td style="text-align: center;">{{student.ngay_sinh  | DateVN }}</td>
+                <td style="text-align: center;">{{student.gioi_tinh}}</td>
+                <td style="text-align: center;">{{student.noi_sinh}}</td>
+                <td style="text-align: center;">{{student.so_cmnd}}</td>
+                <td style="text-align: center;">{{student.so_dien_thoai}}</td>
+                <td style="text-align: center;">{{student.khoa}}</td>
+                <td style="text-align: center;">{{student.lop_hoc}}</td>
+                <td style="text-align: center;">{{student.dia_chi_thuong_tru}}</td>
+                <td style="text-align: center;  "> <img src="../../../../assets/images/img/{{student.anh}}" alt="" width="100px"></td>
+                <td style="text-align: center;">{{student.quyen}}</td>
+                <td  style="text-align: center;">
+                    <button pButton type="button" (click)="openUpdateModal(student)" title="Edit"  class="p-button-secondary">Edit</button>
+                    <button pButton type="button" onclick="confirm('Bạn chắc chắn muốn xóa không?')" (click)="onDelete(student.ma_sinh_vien)" title="Delete"  class="p-button-danger">Delete</button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+    <div class="mt-5" style="position: relative;margin-left: 40%;">
+        <ngb-pagination [collectionSize]="totalItems" [pageSize]="pageSize" [(page)]="page" [maxSize]="10" [rotate]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+    </div>
+</div>
+
+
+<p-dialog [(visible)]="displayAdd" [style]="{width: '50vw'}" [dismissableMask]="true" [modal]="true">
+    <form *ngIf="doneSetupForm" [formGroup]="formdata" (ngSubmit)="onSubmit(formdata.value)">
+        <h4  *ngIf="isCreate" class="modal-title">Thêm sinh viên</h4>
+        <h4 *ngIf="!isCreate" class="modal-title">Sửa sinh viên</h4>
+        <div style="width: 100%;">
+            <label style="font-weight: bold;">Mã sinh viên</label>
+            <input type="text" class="form-control" name="ma_sinh_vien"  formControlName="ma_sinh_vien" placeholder="Mã sinh viên">
+            <div *ngIf="submitted && f.ma_sinh_vien.errors" class="invalid-feedback">
+                <div *ngIf="f.ma_sinh_vien.errors.required">Mã sinh viên bắt buộc phải nhập</div>
+            </div>
+            
+            <label style="font-weight: bold;">Họ tên</label>
+            <input type="text" class="form-control" name="ho_ten"  formControlName="ho_ten" placeholder="Họ tên">
+            <div *ngIf="submitted && f.ho_ten.errors" class="invalid-feedback">
+                <div *ngIf="f.ho_ten.errors.required">Họ tên bắt buộc phải nhập</div>
+            </div>
+            
+            <label style="font-weight: bold;">Ngày sinh</label>
+            <input type="date" class="form-control" name="ngay_sinh"  formControlName="ngay_sinh" placeholder="Ngày sinh">
+            <div *ngIf="submitted && f.ngay_sinh.errors" class="invalid-feedback">
+                <div *ngIf="f.ngay_sinh.errors.required">Ngày sinh bắt buộc phải nhập</div>
+            </div>
+            
+            <label style="font-weight: bold;">Giới tính</label>
+            <select class="form-control form-control-sm" [(ngModel)]="gioi_tinh" formControlName="gioi_tinh"   >
+                <option value="Nam">Nam</option>
+                <option value="Nữ">Nữ</option>
+            </select>
+            <div *ngIf="submitted && f.gioi_tinh.errors" class="invalid-feedback">
+                <div *ngIf="f.gioi_tinh.errors.required">Giới tính bắt buộc phải chọn</div>
+            </div>
+            
+            <label style="font-weight: bold;">Nơi sinh</label>
+            <input type="text" class="form-control" name="noi_sinh"  formControlName="noi_sinh" placeholder="Nơi sinh">
+            <div *ngIf="submitted && f.noi_sinh.errors" class="invalid-feedback">
+                <div *ngIf="f.noi_sinh.errors.required">Nơi sinh bắt buộc phải nhập</div>
+            </div>
+            
+            <label style="font-weight: bold;">Số CMND</label>
+            <input type="text" class="form-control" name="so_cmnd"  formControlName="so_cmnd" placeholder="Số CMND">
+            <div *ngIf="submitted && f.so_cmnd.errors" class="invalid-feedback">
+                <div *ngIf="f.so_cmnd.errors.required">Số CMND bắt buộc phải nhập</div>
+            </div>
+            
+            <label style="font-weight: bold;">Số điện thoại</label>
+            <input type="text" class="form-control" name="so_dien_thoai"  formControlName="so_dien_thoai" placeholder="Số điện thoại">
+            <div *ngIf="submitted && f.so_dien_thoai.errors" class="invalid-feedback">
+                <div *ngIf="f.so_dien_thoai.errors.required">Số điện thoại bắt buộc phải nhập</div>
+            </div>
+            
+            <label style="font-weight: bold;">Email</label>
+            <input type="text" class="form-control" name="email"  formControlName="email" placeholder="Email">
+            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                <div *ngIf="f.email.errors.required"></div>
+            </div>
+            
+            <label style="font-weight: bold;">Khoa</label>
+            <input type="text" class="form-control" name="khoa"  formControlName="khoa" placeholder="Khoa">
+            <div *ngIf="submitted && f.khoa.errors" class="invalid-feedback">
+                <div *ngIf="f.khoa.errors.required">Khoa bắt buộc phải nhập</div>
+            </div>
+            
+            <label style="font-weight: bold;">Lớp học</label>
+            <input type="text" class="form-control" name="lop_hoc"  formControlName="lop_hoc" placeholder="Lớp học">
+            <div *ngIf="submitted && f.lop_hoc.errors" class="invalid-feedback">
+                <div *ngIf="f.lop_hoc.errors.required">Lớp học bắt buộc phải nhập</div>
+            </div>
+            
+            
+            <label style="font-weight: bold;">Địa chỉ thường trú</label>
+            <input type="text" class="form-control" name="dia_chi_thuong_tru"  formControlName="dia_chi_thuong_tru" placeholder="Địa chỉ thường trú">
+            <div *ngIf="submitted && f.dia_chi_thuong_tru.errors" class="invalid-feedback">
+                <div *ngIf="f.dia_chi_thuong_tru.errors.required">CategoryName required</div>
+            </div>
+            
+            <label style="font-weight: bold;">Hình ảnh:</label>
+            <input type="file" class="form-control" (change)="onChange($event)" [(ngModel)]="anh" name="anh" formControlName="anh"   >
+            
+            <label style="font-weight: bold;">Mật khẩu</label>
+            <input type="text" class="form-control" name="mat_khau"  formControlName="mat_khau" placeholder="Mật khẩu">
+            <div *ngIf="submitted && f.mat_khau.errors" class="invalid-feedback">
+                <div *ngIf="f.mat_khau.errors.required">Mật khẩu bắt buộc phải nhập</div>
+            </div>
+            
+            <label style="font-weight: bold;">Quyền</label>
+            <select class="form-control form-control-sm" [(ngModel)]="quyen" formControlName="quyen"   >
+                <option value="User">User</option>
+                <option value="Admin">Admin</option>
+            </select>
+            <div *ngIf="submitted && f.quyen.errors" class="invalid-feedback">
+                <div *ngIf="f.quyen.errors.required">Quyền bắt buộc phải chọn</div>
+            </div>
+            
+            <div class="mt-3">
+                <button type="submit" class="btn btn-primary btn-lg btn-block"><i class="mdi mdi-check"></i>Lưu</button>
+                <button type="button" (click)="displayAdd=false" class="btn btn-danger btn-lg btn-block "> <i class="mdi mdi-window-close"></i>Huỷ</button>
+            </div>
+        </div>
+    </form>
+</p-dialog>
+
